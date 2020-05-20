@@ -1,16 +1,29 @@
-- name: ec2 launcher
+name: Create a new Demo EC2 instance
   hosts: localhost
-  connection: local
+  gather_facts: False
+
+  vars:
+      region: us-east-1
+      instance_type: t2.micro
+      ami: ami-0323c3dd2da7fb37d  # Amazon Linux
+      keypair: baistonprod # pem file name
+  
   tasks:
-  - name: launching ec2
-    ec2:
-	  instance_type: t2.micro
-	  key_name: baistonprod
-	  image: ami-0323c3dd2da7fb37d
-	  region: us-east-1
-	  group: default
-	  count: 1
-	  vpc_subnet_id: subnet-7731cd56
-	  wait: yes
-	  assign_public_ip: yes
+
+    - name: Create an ec2 instance
+      ec2:
+         key_name: "{{ keypair }}"
+         group: default  # security group name
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: 1  # default
+         count_tag:
+            Name: Demo
+         instance_tags:
+            Name: Demo
+         vpc_subnet_id: subnet-7731cd56
+         assign_public_ip: yes
+      register: ec2
 	  
