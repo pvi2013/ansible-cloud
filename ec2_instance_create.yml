@@ -26,4 +26,3 @@ name: Create a new Demo EC2 instance
          vpc_subnet_id: subnet-7731cd56
          assign_public_ip: yes
       register: ec2
-	  
