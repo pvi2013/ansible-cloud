@@ -1,0 +1,16 @@
+- name: ec2 launcher
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: launching ec2
+    ec2:
+	  instance_type: t2.micro
+	  key_name: baistonprod
+	  image: ami-0323c3dd2da7fb37d
+	  region: us-east-1
+	  group: default
+	  count: 1
+	  vpc_subnet_id: subnet-7731cd56
+	  wait: yes
+	  assign_public_ip: yes
+	  
