@@ -2,7 +2,7 @@
   gather_facts: False
 
   vars:
-      region: us-east-1
+      region: us-east-2
       instance_type: t2.micro
       ami: ami-0323c3dd2da7fb37d  # Amazon Linux
       keypair: baistonprod # pem file name
